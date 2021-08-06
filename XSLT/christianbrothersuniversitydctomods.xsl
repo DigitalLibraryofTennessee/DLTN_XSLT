@@ -60,7 +60,9 @@
             <xsl:apply-templates select="dc:type"/>
             
             <!-- recordContentSource -->
-            <xsl:apply-templates select="dc:publisher"/>
+            <recordInfo>
+                <recordContentSource>Christian Brothers University</recordContentSource>
+            </recordInfo>
             
             <!-- accessCondition -->
             <xsl:apply-templates select="dc:rights"/>
@@ -161,13 +163,6 @@
     <!-- typeOfResource -->
     <xsl:template match="dc:type">
         <typeOfResource><xsl:value-of select="replace(lower-case(.), ';', '')"/></typeOfResource>
-    </xsl:template>
-    
-    <!-- recordContentSource -->
-    <xsl:template match="dc:publisher"> 
-        <recordInfo>
-            <recordContentSource><xsl:apply-templates/></recordContentSource>
-        </recordInfo>
     </xsl:template>
     
     <!-- accessCondition -->

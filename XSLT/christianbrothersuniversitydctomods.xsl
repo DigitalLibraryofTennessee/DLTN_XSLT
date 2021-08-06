@@ -41,6 +41,9 @@
             <!-- creator -->
             <xsl:apply-templates select="dc:creator"/>
             
+            <!-- contributor -->
+            <xsl:apply-templates select="dc:contributor"/>
+            
             <!-- date -->
             <xsl:apply-templates select="dc:date"/>
             
@@ -102,6 +105,16 @@
             </role>
         </name>
     </xsl:template>
+    
+    <!-- contributor -->
+    <xsl:template match="dc:contributor">
+        <name>
+            <namePart><xsl:apply-templates/></namePart>
+            <role>
+                <roleTerm authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/ctb">Contributor</roleTerm>
+            </role>
+        </name>
+    </xsl:template>
 
     <!-- originInfo -->
     <xsl:template match="dc:date">
@@ -159,6 +172,7 @@
     
     <!-- accessCondition -->
     <xsl:template match='dc:rights'>
+        <accessCondition type="local rights statement">While CBU may house an item, it does not necessarily hold the copyright on the item, nor may it be able to determine if the item is still protected under copyright law. Users are solely responsible for determining the existence of such instances and for obtaining any other permissions and paying associated fees that may be necessary for the intended use. Any image from the library's collection must cite as the source: Brother I. Leo O'Donnell Archives, Plough Library, Christian Brothers University. For all requests, please contact the Archives at archives@cbu.edu.</accessCondition>
         <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
     </xsl:template>
 

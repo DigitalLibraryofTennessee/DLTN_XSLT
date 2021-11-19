@@ -3,7 +3,7 @@
     xmlns:oai_dc='http://www.openarchives.org/OAI/2.0/oai_dc/' xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/"
     version="2.0" xmlns="http://www.loc.gov/mods/v3"
     exclude-result-prefixes="dc oai_dc">
-
+    
     <!-- output settings -->
     <xsl:output encoding="UTF-8" method="xml" omit-xml-declaration="yes" indent="yes"/>
     <xsl:strip-space elements="*"/>
@@ -22,7 +22,7 @@
     
     <!-- match metadata -->
     <xsl:template match="oai_dc:dc">
-    
+        
         <!-- match the document root and return a MODS record -->
         <mods xmlns="http://www.loc.gov/mods/v3" version="3.5"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -117,7 +117,7 @@
             </role>
         </name>
     </xsl:template>
-
+    
     <!-- originInfo -->
     <xsl:template match="dc:date">
         <originInfo><dateCreated><xsl:apply-templates/></dateCreated></originInfo>
@@ -129,7 +129,7 @@
             <form><xsl:value-of select="lower-case(.)"/></form>
         </physicalDescription>
     </xsl:template>
-
+    
     <!-- geographic -->
     <xsl:template match="dc:coverage">
         <subject><geographic><xsl:apply-templates/></geographic></subject>
@@ -167,8 +167,21 @@
     
     <!-- accessCondition -->
     <xsl:template match='dc:rights'>
-        <accessCondition type="local rights statement">While CBU may house an item, it does not necessarily hold the copyright on the item, nor may it be able to determine if the item is still protected under copyright law. Users are solely responsible for determining the existence of such instances and for obtaining any other permissions and paying associated fees that may be necessary for the intended use. Any image from the library's collection must cite as the source: Brother I. Leo O'Donnell Archives, Plough Library, Christian Brothers University. For all requests, please contact the Archives at archives@cbu.edu.</accessCondition>
-        <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
+        <xsl:variable name="vRights" select="normalize-space(.)"/>
+        <xsl:choose>
+            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/CNE/1.0/')">
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
+            </xsl:when>
+            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/NoC-US/1.0/')">
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>
+            </xsl:when>
+            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/InC/1.0/')">
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
+            </xsl:when>
+            <xsl:otherwise>
+                <accessCondition type="local rights statement">While CBU may house an item, it does not necessarily hold the copyright on the item, nor may it be able to determine if the item is still protected under copyright law. Users are solely responsible for determining the existence of such instances and for obtaining any other permissions and paying associated fees that may be necessary for the intended use. Any image from the library's collection must cite as the source: Brother I. Leo O'Donnell Archives, Plough Library, Christian Brothers University. For all requests, please contact the Archives at archives@cbu.edu.</accessCondition>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-
+    
 </xsl:stylesheet>

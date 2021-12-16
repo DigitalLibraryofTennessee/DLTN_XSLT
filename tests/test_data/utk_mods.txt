@@ -40,11 +40,19 @@ utk_kefauver
 utk_kintner
 utk_knoxgardens
 utk_ladycross
+utk_ladyrowing
+utk_ladysoccer
+utk_ladysoft
+utk_ladyswim
 utk_ladytennis
+utk_ladytrack
+utk_ladyvolley
 utk_marchingband
 utk_menbball
 utk_menbase
 utk_mencross
+utk_mengolf
+utk_mentennis
 utk_mentrack
 utk_mpabaker
 utk_mugwump
@@ -54,6 +62,7 @@ utk_postcards
 utk_ramseyfp
 utk_revwar
 utk_rfj
+utk_rfta
 utk_rmtravis
 utk_roth
 utk_ruskin
@@ -78,6 +87,7 @@ utk_walden
 utk_wcc
 utk_wderfilms
 utk_webster
+utk_wrestling
 utk_wwiioh
 utk_womenbball
 utk_yrb

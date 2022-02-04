@@ -53,10 +53,7 @@
             <!-- subject(s) -->
             <xsl:apply-templates select="dc:subject"/>
             
-            <!-- form -->
-            <xsl:apply-templates select="dc:format"/>
-            
-            <!-- typeOfResource -->
+            <!-- typeOfResource and form -->
             <xsl:apply-templates select="dc:type"/>
             
             <!-- recordContentSource -->
@@ -155,7 +152,27 @@
     
     <!-- typeOfResource -->
     <xsl:template match="dc:type">
-        <typeOfResource><xsl:value-of select="replace(lower-case(.), ';', '')"/></typeOfResource>
+        <xsl:variable name="vtype" select="lower-case(.)"/>
+        <xsl:choose>
+            <xsl:when test="contains(., 'still image')">  
+                <typeOfResource>still image</typeOfResource>
+            </xsl:when>
+            <xsl:when test="contains(.,'text')">
+                <typeOfResource>text</typeOfResource>
+            </xsl:when>
+            <xsl:when test="contains(.,'photograph') or contains(., 'glass plate negatives')">
+                <typeOfResource>still image</typeOfResource>
+                <physicalDescription>
+                    <form>photographs</form>
+                </physicalDescription>
+            </xsl:when>
+            <xsl:when test="contains(.,'maps')">
+                <typeOfResource>cartographic</typeOfResource>
+                <physicalDescription>
+                    <form>maps (documents)</form>
+                </physicalDescription>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     
     <!-- accessCondition -->
@@ -171,6 +188,9 @@
             <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/InC/1.0/')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
             </xsl:when>
+            <xsl:otherwise>
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     

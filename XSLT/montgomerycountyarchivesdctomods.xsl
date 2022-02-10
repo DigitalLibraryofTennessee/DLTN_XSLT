@@ -58,7 +58,7 @@
             
             <!-- recordContentSource -->
             <recordInfo>
-                <recordContentSource>Montgomery County Archives</recordContentSource>
+                <recordContentSource>Montgomery County (Tenn.) Archives</recordContentSource>
             </recordInfo>
             
             <!-- accessCondition -->

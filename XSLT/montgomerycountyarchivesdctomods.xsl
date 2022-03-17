@@ -152,26 +152,19 @@
     
     <!-- typeOfResource -->
     <xsl:template match="dc:type">
-        <xsl:variable name="vtype" select="lower-case(.)"/>
         <xsl:choose>
-            <xsl:when test="contains(., 'still image')">  
-                <typeOfResource>still image</typeOfResource>
-            </xsl:when>
-            <xsl:when test="contains(.,'text')">
+            <xsl:when test="contains(., 'records (documents)')">
                 <typeOfResource>text</typeOfResource>
-            </xsl:when>
-            <xsl:when test="contains(.,'photograph') or contains(., 'glass plate negatives')">
+                <physicalDescription>
+                    <form>records (documents)</form>
+                </physicalDescription>
+             </xsl:when>
+             <xsl:when test="contains(.,'photographs') or contains(., 'Photographs')">
                 <typeOfResource>still image</typeOfResource>
                 <physicalDescription>
                     <form>photographs</form>
                 </physicalDescription>
-            </xsl:when>
-            <xsl:when test="contains(.,'maps')">
-                <typeOfResource>cartographic</typeOfResource>
-                <physicalDescription>
-                    <form>maps (documents)</form>
-                </physicalDescription>
-            </xsl:when>
+             </xsl:when>
         </xsl:choose>
     </xsl:template>
     

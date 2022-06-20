@@ -11,6 +11,7 @@ utk_arrow
 utk_arrpgimg
 utk_arrscrap
 utk_arrsimple
+utk_boydcs
 utk_burford
 utk_brehm
 utk_calahan
@@ -78,6 +79,7 @@ utk_tennvolsmag
 utk_thompson
 utk_torch
 utk_univmonthly
+utk_utrecord
 utk_utsmc
 utk_vanvactor
 utk_voice

@@ -78,9 +78,6 @@
                     <url access="preview"><xsl:value-of select="$identifier-preview-url"/></url>
                 </location>
             </xsl:when>
-            <xsl:otherwise>
-                <identifier><xsl:value-of select="normalize-space(.)"/></identifier>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
@@ -105,18 +102,13 @@
     </xsl:template>
     
     <!-- subject(s) -->
-    <!-- for subjects, whether they contain a ';' or not -->
     <xsl:template match="dc:subject">
-        <xsl:variable name="subj-tokens" select="tokenize(., '; ')"/>
+        <xsl:variable name="subj-tokens" select="tokenize(., ';')"/>
+        <xsl:for-each select="$subj-tokens">
+            <xsl:variable name="subj-tokens" select="tokenize(., '; ')"/>
             <xsl:for-each select="$subj-tokens">
                 <xsl:choose>
-                    <xsl:when test="ends-with(., ';')">
-                        <subject>
-                            <topic>
-                                <xsl:value-of select="substring(., 1, string-length(.) -1)"/>
-                            </topic>
-                        </subject>
-                    </xsl:when>
+                    <xsl:when test="ends-with(., ' ')"/>
                     <xsl:otherwise>
                         <subject>
                             <topic><xsl:value-of select="normalize-space(.)"/></topic>
@@ -124,7 +116,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>
-        
+        </xsl:for-each>
     </xsl:template>
     
     <!-- typeOfResource -->
@@ -136,6 +128,9 @@
              <xsl:when test="contains(.,'sound')">
                  <typeOfResource>sound recording-nonmusical</typeOfResource>
              </xsl:when>
+            <xsl:when test="contains(.,'Text')">
+                <typeOfResource>text</typeOfResource>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     

@@ -27,6 +27,7 @@ utk_ekcd
 utk_emancip
 utk_fbpro
 utk_fiftyyears
+utk_galston
 utk_gamble
 utk_garner
 utk_harp
@@ -64,6 +65,7 @@ utk_ramseyfp
 utk_revwar
 utk_rfj
 utk_rfta
+utk_rftaart
 utk_rmtravis
 utk_roth
 utk_ruskin

@@ -45,7 +45,7 @@
                 <xsl:apply-templates select="dcterms:created"/>
                 
                 <!-- subject -->
-                <xsl:apply-templates select="dcterms:subject"/>
+                <subject><xsl:apply-templates select="dcterms:subject"/></subject>
                 
                 <!-- recordContentSource -->
                 <recordInfo>
@@ -96,12 +96,28 @@
     
     <!-- dateCreated -->
     <xsl:template match="dcterms:created">
-        <originInfo><dateCreated><xsl:apply-templates/></dateCreated></originInfo>
+        <xsl:choose>
+            <xsl:when test="contains(., 'circa')"/>
+            <xsl:otherwise>   
+                <originInfo><dateCreated><xsl:apply-templates/></dateCreated></originInfo>
+            </xsl:otherwise> 
+        </xsl:choose>
     </xsl:template>
     
     <!-- subject -->
     <xsl:template match="dcterms:subject">
-        <subject><topic><xsl:apply-templates/></topic></subject>
+        <xsl:choose>
+            <xsl:when test="ends-with(., '.')">
+                <topic>
+                    <xsl:apply-templates select="substring(., 1, string-length(.) -1)"/>
+                </topic>
+            </xsl:when>
+            <xsl:otherwise>
+                <topic>
+                    <xsl:apply-templates/>
+                </topic>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- accessCondition -->

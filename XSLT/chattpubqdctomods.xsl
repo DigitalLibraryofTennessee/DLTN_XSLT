@@ -35,8 +35,8 @@
                 <!-- title -->
                 <xsl:apply-templates select="dcterms:title"/>
                 
-                <!-- identifiers -->
-                <xsl:apply-templates select="dcterms:identifier"/>
+                <!-- identifier -->
+                <location><xsl:apply-templates select="dcterms:identifier"/></location>
                 
                 <!-- description -->
                 <xsl:apply-templates select="dcterms:description"/>
@@ -67,11 +67,9 @@
       
     <!-- identifiers -->
     <xsl:template match='dcterms:identifier'>
-        <location>
         <xsl:choose>
-            <xsl:when test="starts-with(., 'http')">
-                <xsl:variable name="identifier-object-url" select="replace(replace(., 'files/original', 's/localhistory/item'), '[^/]+$', '')"/>
-                <url usage="primary" access="object in context"><xsl:value-of select="$identifier-object-url"/></url>
+            <xsl:when test="contains(., 'localhistory')">
+                <url usage="primary" access="object in context"><xsl:apply-templates/></url>
             </xsl:when>
         </xsl:choose>
         <xsl:choose>
@@ -82,11 +80,7 @@
                 <xsl:variable name="preview-url" select="replace(., 'original', 'medium')"/>
                 <url access="preview"><xsl:value-of select="$preview-url"/></url>
             </xsl:when>
-            <xsl:otherwise>
-                <identifier><xsl:value-of select="normalize-space(.)"/></identifier>
-            </xsl:otherwise>
         </xsl:choose>
-        </location>
     </xsl:template>
     
     <!-- description -->

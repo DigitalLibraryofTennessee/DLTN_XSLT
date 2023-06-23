@@ -103,7 +103,7 @@
         <xsl:choose>
             <xsl:when test="ends-with(., '.')">
                 <topic>
-                    <xsl:apply-templates select="substring(., 1, string-length(.) -1)"/>
+                    <xsl:value-of select="substring(., 1, string-length(.) -1)"/>
                 </topic>
             </xsl:when>
             <xsl:otherwise>

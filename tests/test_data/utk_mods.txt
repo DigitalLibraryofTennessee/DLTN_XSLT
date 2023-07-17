@@ -58,6 +58,7 @@ utk_mentennis
 utk_mentrack
 utk_mpabaker
 utk_mugwump
+utk_ossoli
 utk_phoenix
 utk_playbills
 utk_postcards

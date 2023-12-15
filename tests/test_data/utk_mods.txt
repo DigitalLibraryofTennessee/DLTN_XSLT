@@ -64,7 +64,6 @@ utk_phoenix
 utk_playbills
 utk_postcards
 utk_ramseyfp
-utk_revwar
 utk_rfj
 utk_rfta
 utk_rftaart

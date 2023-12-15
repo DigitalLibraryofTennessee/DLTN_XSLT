@@ -49,6 +49,7 @@ utk_ladyswim
 utk_ladytennis
 utk_ladytrack
 utk_ladyvolley
+utk_lanecol
 utk_marchingband
 utk_menbball
 utk_menbase
@@ -89,6 +90,7 @@ utk_voice
 utk_voloh
 utk_vpmoore
 utk_walden
+utk_wallace
 utk_wcc
 utk_wderfilms
 utk_webster

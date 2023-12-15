@@ -52,6 +52,9 @@
                     <recordContentSource>Chattanooga Public Library</recordContentSource>
                 </recordInfo>
                 
+                <!-- collection title -->
+                <xsl:apply-templates select="dcterms:isPartOf"></xsl:apply-templates>
+                
                 <!-- rights -->
                 <xsl:apply-templates select="dcterms:rights"/>
                 
@@ -112,6 +115,15 @@
                 </topic>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <!-- collection title -->
+    <xsl:template match='dcterms:isPartOf'>
+        <relatedItem displayLabel="Collection" type="host">
+            <titleInfo>
+                <title><xsl:apply-templates/></title>
+            </titleInfo>
+        </relatedItem>
     </xsl:template>
     
     <!-- accessCondition -->

@@ -159,6 +159,24 @@
                     <form>records (documents)</form>
                 </physicalDescription>
              </xsl:when>
+             <xsl:when test="contains(., 'correspondence')">
+                <typeOfResource>text</typeOfResource>
+                <physicalDescription>
+                    <form>correspondence</form>
+                </physicalDescription>
+            </xsl:when>
+            <xsl:when test="contains(., 'programs')">
+                <typeOfResource>text</typeOfResource>
+                <physicalDescription>
+                    <form>programs (documents)</form>
+                </physicalDescription>
+            </xsl:when>
+            <xsl:when test="contains(., 'publications')">
+                <typeOfResource>text</typeOfResource>
+                <physicalDescription>
+                    <form>publications (documents)</form>
+                </physicalDescription>
+            </xsl:when>
              <xsl:when test="contains(.,'photographs') or contains(., 'Photographs')">
                 <typeOfResource>still image</typeOfResource>
                 <physicalDescription>

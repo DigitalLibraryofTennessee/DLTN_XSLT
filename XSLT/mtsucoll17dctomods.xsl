@@ -66,7 +66,14 @@
             </recordInfo>
             
             <!-- accessCondition -->
-            <xsl:apply-templates select="dc:rights"/>
+            <xsl:choose>
+                <xsl:when test="dc:rights">
+                    <xsl:apply-templates select="dc:rights"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
+                </xsl:otherwise>
+            </xsl:choose>
             
         </mods>
     </xsl:template>
@@ -207,5 +214,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+        
 </xsl:stylesheet>

@@ -185,21 +185,23 @@
     <xsl:template match='dc:rights'>
         <xsl:variable name="vRights" select="normalize-space(.)"/>
         <xsl:choose>
-            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/CNE/1.0/') or contains(lower-case($vRights), 'copyright not evaluated')">
+            <xsl:when test="contains($vRights, 'CNE/1.0/') or contains(lower-case($vRights), 'copyright not evaluated')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
             </xsl:when>
-            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/NoC-US/1.0/') or contains(lower-case($vRights), 'no copyright') or contains($vRights, 'Reproduction permitted for non-profit educational and research purposes only.')">
+            <xsl:when test="contains($vRights, 'NoC-US/1.0/') or contains(lower-case($vRights), 'no copyright') or contains($vRights, 'Reproduction permitted for non-profit educational and research purposes only.')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>
             </xsl:when>
-            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/InC-NC/1.0/') or contains(lower-case($vRights), 'non-commercial use permitted')">
+            <xsl:when test="contains($vRights, 'UND/1.0/')">
+                <accessCondition type="use and reproduction" xlink:href="https://rightsstatements.org/vocab/UND/1.0/">Copyright Undetermined</accessCondition>
+            </xsl:when>
+            <xsl:when test="contains($vRights, 'InC/1.0/')">
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
+            </xsl:when>
+            <xsl:when test="contains($vRights, 'InC-NC/1.0/') or contains(lower-case($vRights), 'non-commercial use permitted')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC-NC/1.0/">In Copyright - Non-Commercial Use Permitted</accessCondition>
             </xsl:when>
-            <xsl:when test="contains($vRights, 'http://rightsstatements.org/vocab/InC-EDU/1.0/') or contains(lower-case($vRights), 'educational use permitted')">
+            <xsl:when test="contains($vRights, 'InC-EDU/1.0/') or contains(lower-case($vRights), 'educational use permitted')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC-EDU/1.0/">In Copyright - Educational Use Permitted</accessCondition>
-            </xsl:when>
-            <xsl:when test="contains($vRights, 'Credit')">
-                <note><xsl:apply-templates/></note>
-                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
             </xsl:when>
             <xsl:when test="contains($vRights, 'Digital microfilm purchased from National Archives.')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>

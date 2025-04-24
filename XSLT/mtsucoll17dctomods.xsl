@@ -68,7 +68,7 @@
             <!-- accessCondition -->
             <xsl:choose>
                 <xsl:when test="dc:rights">
-                    <xsl:apply-templates select="dc:rights"/>
+                    <xsl:apply-templates select="dc:rights[1]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
@@ -207,7 +207,7 @@
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</accessCondition>
                 <note>Digital microfilm purchased from National Archives.</note>
             </xsl:when>
-            <xsl:when test="contains($vRights, 'Copyright of the creator, used with permission')">
+            <xsl:when test="contains($vRights, 'Copyright of the creator')">
                 <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/InC/1.0/">In Copyright</accessCondition>
             </xsl:when>
             <xsl:otherwise>

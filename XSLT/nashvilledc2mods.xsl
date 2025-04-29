@@ -42,6 +42,9 @@
             <!-- creator -->
             <xsl:apply-templates select="dc:creator"/>
             
+            <!-- contributor -->
+            <xsl:apply-templates select="dc:contributor"/>
+            
             <!-- date -->
             <xsl:apply-templates select="dc:date"/>
             
@@ -129,6 +132,17 @@
                         </name>
                     </xsl:otherwise>
                 </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match='dc:contributor'>
+        <xsl:for-each select="tokenize(normalize-space(.), ';')">
+                    <name>
+                        <namePart><xsl:value-of select="normalize-space(.)"/></namePart>
+                        <role>
+                            <roleTerm type="text" valueURI="http://id.loc.gov/vocabulary/relators/ctb">Contributor</roleTerm>
+                        </role>
+                    </name>
         </xsl:for-each>
     </xsl:template>
     

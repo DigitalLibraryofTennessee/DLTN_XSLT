@@ -62,15 +62,8 @@
                 <recordContentSource>Nashville Public Library</recordContentSource>
             </recordInfo>
             
-            <!-- accessCondition -->
-            <xsl:choose>
-                <xsl:when test="dc:rights">
-                    <xsl:apply-templates select="dc:rights"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
-                </xsl:otherwise>
-            </xsl:choose>
+            <!-- accessCondition -->            
+            <xsl:apply-templates select="dc:rights"/>
             
         </mods>
     </xsl:template>
@@ -190,6 +183,19 @@
             <xsl:when test="contains(.,'Sound')">
                 <typeOfResource>sound recording-nonmusical</typeOfResource>
             </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- accessCondition -->
+    <xsl:template match='dc:rights'>
+        <xsl:variable name="vRights" select="normalize-space(.)"/>
+        <xsl:choose>
+            <xsl:when test="contains($vRights, 'U.S. and international copyright laws protect this digital content')">
+                <accessCondition type="local rights statement"><xsl:apply-templates/></accessCondition>
+            </xsl:when>
+            <xsl:otherwise>
+                <accessCondition type="use and reproduction" xlink:href="http://rightsstatements.org/vocab/CNE/1.0/">Copyright Not Evaluated</accessCondition>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
         

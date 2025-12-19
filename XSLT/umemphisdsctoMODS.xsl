@@ -32,11 +32,18 @@
             <!-- title -->
             <xsl:apply-templates select="dc:title"/>  
             
-            <!-- abstract and thumbnail -->
-            <xsl:apply-templates select="dc:description"/>
+            <xsl:apply-templates select="dc:description[1]"/>
             
-            <!-- identifier -->
-            <xsl:apply-templates select="dc:identifier"/>
+            <xsl:if test="dc:identifier|dc:description">
+                <location>
+                    <xsl:for-each select="dc:identifier[starts-with(., 'https:')]">
+                        <url usage="primary" access="object in context"><xsl:value-of select="normalize-space(.)"/></url>
+                    </xsl:for-each>
+                    <xsl:for-each select="dc:description[starts-with(., 'https:')]">
+                        <url access="preview"><xsl:value-of select="normalize-space(.)"/></url>
+                    </xsl:for-each>
+                </location>
+            </xsl:if>
             
             <!-- typeOfResource -->
             <xsl:apply-templates select="dc:type"/>
@@ -62,26 +69,6 @@
     <!-- abstract -->
     <xsl:template match="dc:description[1]">
         <abstract><xsl:value-of select="substring(., 1, string-length(.))"/></abstract>
-    </xsl:template>
-    
-    <!-- URLs (description & identifier) -->
-    <xsl:template match='dc:identifier'>
-        <xsl:choose>
-            <xsl:when test="starts-with(., 'https:')">
-                <location><url usage="primary" access="object in context"><xsl:apply-templates/></url></location>
-            </xsl:when>
-            <xsl:otherwise>
-                <identifier><xsl:value-of select="normalize-space(.)"/></identifier>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    
-    <xsl:template match='dc:description'>
-        <xsl:choose>
-            <xsl:when test="starts-with(., 'https:')">
-                <location><url access="preview"><xsl:apply-templates/></url></location>
-            </xsl:when>
-        </xsl:choose>
     </xsl:template>
     
     <!-- typeOfResource -->

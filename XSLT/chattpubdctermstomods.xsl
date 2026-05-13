@@ -77,7 +77,10 @@
         </xsl:choose>
         <xsl:choose>
             <xsl:when test="ends-with(., '.pdf')">
-                <url access="preview">https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/PDF_icon.svg/1024px-PDF_icon.svg.png</url>
+                <url access="preview">https://upload.wikimedia.org/wikipedia/commons/4/47/Pdf_337946.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original</url>
+            </xsl:when>
+            <xsl:when test="ends-with(., '.mp3')">
+                <url access="preview">https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Bootstrap_filetype-mp3.svg/1280px-Bootstrap_filetype-mp3.svg.png</url>
             </xsl:when>
             <xsl:when test="ends-with(., '.jpg')">
                 <xsl:variable name="preview-url" select="replace(., 'original', 'medium')"/>

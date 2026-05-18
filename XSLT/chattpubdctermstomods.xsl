@@ -36,7 +36,7 @@
                 <xsl:apply-templates select="dcterms:title"/>
                 
                 <!-- identifier -->
-                <location><xsl:apply-templates select="dcterms:identifier"/></location>
+                <location><xsl:apply-templates select="dcterms:identifier[@xsi:type='dcterms:URI']"/></location>
                 
                 <!-- description -->
                 <xsl:apply-templates select="dcterms:description"/>
@@ -70,20 +70,29 @@
       
     <!-- identifiers -->
     <xsl:template match='dcterms:identifier'>
+        <xsl:variable name="vThumb" select="normalize-space(.)"/>
         <xsl:choose>
-            <xsl:when test="contains(., 'localhistory')">
+            <xsl:when test="contains($vThumb, 'localhistory')">
                 <url usage="primary" access="object in context"><xsl:apply-templates/></url>
             </xsl:when>
         </xsl:choose>
         <xsl:choose>
-            <xsl:when test="ends-with(., '.pdf')">
-                <url access="preview">https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/PDF_icon.svg/1024px-PDF_icon.svg.png</url>
+        <xsl:when test="ends-with($vThumb, '.pdf')">
+                <url access="preview">https://upload.wikimedia.org/wikipedia/commons/4/47/Pdf_337946.png</url>
             </xsl:when>
-            <xsl:when test="ends-with(., '.jpg')">
+            <xsl:when test="ends-with($vThumb, '.jpg')">
                 <xsl:variable name="preview-url" select="replace(., 'original', 'medium')"/>
                 <url access="preview"><xsl:value-of select="$preview-url"/></url>
             </xsl:when>
+            <xsl:when test="ends-with($vThumb, '.mp3')">
+                <xsl:choose>
+                    <xsl:when test="position()=2">
+                        <url access="preview">https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Bootstrap_filetype-mp3.svg/1280px-Bootstrap_filetype-mp3.svg.png</url>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:when>
         </xsl:choose>
+
     </xsl:template>
     
     <!-- description -->

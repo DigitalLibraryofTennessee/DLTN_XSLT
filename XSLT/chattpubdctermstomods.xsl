@@ -74,11 +74,6 @@
         <xsl:choose>
             <xsl:when test="contains($vThumb, 'localhistory')">
                 <url usage="primary" access="object in context"><xsl:apply-templates/></url>
-                <xsl:choose>
-                    <xsl:when test="contains($vThumb, 'https://collections.chattlibrary.org/s/localhistory/item/836194')">
-                        <url access="preview">https://upload.wikimedia.org/wikipedia/commons/5/55/GDocs.png</url>
-                    </xsl:when>
-                </xsl:choose>
             </xsl:when>
         </xsl:choose>
         <xsl:choose>
